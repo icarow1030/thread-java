@@ -5,6 +5,7 @@ public class Veiculo {
     private int idEstacao;
     private int idFuncionario;
     private int posicaoEsteiraFabrica;
+    private int posicaoEsteiraLoja;
 
     public Veiculo(int id, String cor, String tipo, int idEstacao, int idFuncionario) {
         this.id = id;
@@ -18,9 +19,13 @@ public class Veiculo {
         this.posicaoEsteiraFabrica = posicao;
     }
 
+    public void setPosicaoEsteiraLoja(int posicao) {
+        this.posicaoEsteiraLoja = posicao;
+    }
+
     @Override
     public String toString() {
-        return String.format("Veiculo{id=%d, cor='%s', tipo='%s', idEstacao=%d, idFuncionario=%d, posicaoEsteiraFabrica=%d}",
-            id, cor, tipo, idEstacao, idFuncionario, posicaoEsteiraFabrica);
+        return String.format("Veiculo{id=%d, cor='%s', tipo='%s', idEstacao=%d, idFuncionario=%d, posicaoEsteiraFabrica=%d, posicaoEsteiraLoja=%d}",
+            id, cor, tipo, idEstacao, idFuncionario, posicaoEsteiraFabrica, posicaoEsteiraLoja);
     }
 }

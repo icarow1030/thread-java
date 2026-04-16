@@ -1,6 +1,6 @@
-
 import java.util.concurrent.Semaphore;
-public class EsteiraFabrica {
+
+public class EsteiraLoja {
     private Veiculo[] buffer;
     private int capacidade;
     private int in;
@@ -10,7 +10,7 @@ public class EsteiraFabrica {
     private Semaphore espacosVazios;
     private Semaphore veiculosProntos;
 
-    public EsteiraFabrica(int capacidade) {
+    public EsteiraLoja(int capacidade) {
         this.capacidade = capacidade;
         this.buffer = new Veiculo[capacidade];
         this.in = 0;
@@ -27,8 +27,8 @@ public class EsteiraFabrica {
 
         try {
             buffer[in] = veiculo;
-            veiculo.setPosicaoEsteiraFabrica(in);
-            System.out.println("LOG PRODUCAO: " + veiculo);
+            veiculo.setPosicaoEsteiraLoja(in);
+            System.out.println("LOG RECEBIMENTO LOJA: " + veiculo);
             in = (in + 1) % capacidade;
         } finally {
             mutex.release();
