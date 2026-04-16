@@ -1,3 +1,7 @@
+package br.com.threadjava.app;
+
+import br.com.threadjava.factory.Estacao;
+import br.com.threadjava.factory.EsteiraFabrica;
 import java.util.concurrent.Semaphore;
 
 public class FabricaMain {

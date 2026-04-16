@@ -1,3 +1,5 @@
+package br.com.threadjava.model;
+
 public class Veiculo {
     private int id;
     private String cor;

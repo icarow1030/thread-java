@@ -1,4 +1,9 @@
 
+package br.com.threadjava.store;
+
+import br.com.threadjava.factory.EsteiraFabrica;
+import br.com.threadjava.model.Veiculo;
+
 public class Loja extends Thread {
     private int idLoja;
     private EsteiraLoja esteira;

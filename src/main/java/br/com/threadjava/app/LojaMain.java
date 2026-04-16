@@ -1,3 +1,9 @@
+package br.com.threadjava.app;
+
+import br.com.threadjava.client.Cliente;
+import br.com.threadjava.factory.Estacao;
+import br.com.threadjava.factory.EsteiraFabrica;
+import br.com.threadjava.store.Loja;
 import java.util.concurrent.Semaphore;
 
 public class LojaMain {

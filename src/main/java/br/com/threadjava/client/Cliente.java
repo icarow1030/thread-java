@@ -1,3 +1,7 @@
+package br.com.threadjava.client;
+
+import br.com.threadjava.model.Veiculo;
+import br.com.threadjava.store.Loja;
 import java.util.ArrayList;
 import java.util.List;
 

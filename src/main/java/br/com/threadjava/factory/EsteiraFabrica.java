@@ -1,6 +1,8 @@
-import java.util.concurrent.Semaphore;
+package br.com.threadjava.factory;
 
-public class EsteiraLoja {
+import br.com.threadjava.model.Veiculo;
+import java.util.concurrent.Semaphore;
+public class EsteiraFabrica {
     private Veiculo[] buffer;
     private int capacidade;
     private int in;
@@ -10,7 +12,7 @@ public class EsteiraLoja {
     private Semaphore espacosVazios;
     private Semaphore veiculosProntos;
 
-    public EsteiraLoja(int capacidade) {
+    public EsteiraFabrica(int capacidade) {
         this.capacidade = capacidade;
         this.buffer = new Veiculo[capacidade];
         this.in = 0;
@@ -27,8 +29,8 @@ public class EsteiraLoja {
 
         try {
             buffer[in] = veiculo;
-            veiculo.setPosicaoEsteiraLoja(in);
-            System.out.println("LOG RECEBIMENTO LOJA: " + veiculo);
+            veiculo.setPosicaoEsteiraFabrica(in);
+            System.out.println("LOG PRODUCAO: " + veiculo);
             in = (in + 1) % capacidade;
         } finally {
             mutex.release();

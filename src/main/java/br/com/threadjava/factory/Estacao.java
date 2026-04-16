@@ -1,3 +1,5 @@
+package br.com.threadjava.factory;
+
 import java.util.concurrent.Semaphore;
 public class Estacao {
     private int idEstacao;
