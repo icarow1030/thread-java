@@ -1,7 +1,7 @@
-package main.java.br.com.threadjava.factory;
+package br.com.threadjava.factory;
 
 
-import main.java.br.com.threadjava.model.Veiculo;
+import br.com.threadjava.model.Veiculo;
 
 import java.util.concurrent.Semaphore;
 public class Funcionario extends Thread {

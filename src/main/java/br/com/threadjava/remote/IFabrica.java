@@ -1,5 +1,5 @@
-package main.java.br.com.threadjava.remote;
-import main.java.br.com.threadjava.model.Veiculo;
+package br.com.threadjava.remote;
+import br.com.threadjava.model.Veiculo;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

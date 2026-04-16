@@ -1,9 +1,9 @@
-package main.java.br.com.threadjava.app;
+package br.com.threadjava.app;
 
-import main.java.br.com.threadjava.factory.Estacao;
-import main.java.br.com.threadjava.factory.EsteiraFabrica;
-import main.java.br.com.threadjava.remote.IFabrica;
-import main.java.br.com.threadjava.service.FabricaServico;
+import br.com.threadjava.factory.Estacao;
+import br.com.threadjava.factory.EsteiraFabrica;
+import br.com.threadjava.remote.IFabrica;
+import br.com.threadjava.service.FabricaServico;
 
 import java.util.concurrent.Semaphore;
 import java.rmi.registry.LocateRegistry;

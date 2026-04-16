@@ -1,4 +1,4 @@
-package main.java.br.com.threadjava.factory;
+package br.com.threadjava.factory;
 
 import java.util.concurrent.Semaphore;
 public class Estacao {

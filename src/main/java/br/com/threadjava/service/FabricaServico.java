@@ -1,7 +1,7 @@
-package main.java.br.com.threadjava.service;
-import main.java.br.com.threadjava.factory.EsteiraFabrica;
-import main.java.br.com.threadjava.model.Veiculo;
-import main.java.br.com.threadjava.remote.IFabrica;
+package br.com.threadjava.service;
+import br.com.threadjava.factory.EsteiraFabrica;
+import br.com.threadjava.model.Veiculo;
+import br.com.threadjava.remote.IFabrica;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

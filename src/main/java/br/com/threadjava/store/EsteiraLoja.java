@@ -1,6 +1,6 @@
-package main.java.br.com.threadjava.store;
+package br.com.threadjava.store;
 
-import main.java.br.com.threadjava.model.Veiculo;
+import br.com.threadjava.model.Veiculo;
 
 import java.util.concurrent.Semaphore;
 

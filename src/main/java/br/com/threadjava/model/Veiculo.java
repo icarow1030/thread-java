@@ -1,4 +1,4 @@
-package main.java.br.com.threadjava.model;
+package br.com.threadjava.model;
 
 import java.io.Serializable;
 
