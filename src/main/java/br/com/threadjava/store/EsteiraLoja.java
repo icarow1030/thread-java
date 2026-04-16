@@ -1,6 +1,7 @@
-package br.com.threadjava.store;
+package main.java.br.com.threadjava.store;
 
-import br.com.threadjava.model.Veiculo;
+import main.java.br.com.threadjava.model.Veiculo;
+
 import java.util.concurrent.Semaphore;
 
 public class EsteiraLoja {
@@ -24,29 +25,30 @@ public class EsteiraLoja {
         this.veiculosProntos = new Semaphore(0);
     }
 
-    public void inserir(Veiculo veiculo) throws InterruptedException {
+    public int inserir(Veiculo veiculo) throws InterruptedException {
         espacosVazios.acquire();
         mutex.acquire();
-
+        int posicaoInserida = in;
         try {
             buffer[in] = veiculo;
             veiculo.setPosicaoEsteiraLoja(in);
             System.out.println("LOG RECEBIMENTO LOJA: " + veiculo);
             in = (in + 1) % capacidade;
+            return posicaoInserida;
         } finally {
             mutex.release();
             veiculosProntos.release();
         }
     }
 
-    public Veiculo remover() throws InterruptedException {
+    public Veiculo venderParaCliente(int idCliente, int idLoja) throws InterruptedException {
         veiculosProntos.acquire();
         mutex.acquire();
-
         try {
             Veiculo veiculo = buffer[out];
             buffer[out] = null;
             out = (out + 1) % capacidade;
+            System.out.println("LOG VENDA LOJA " + idLoja + " -> CLIENTE " + idCliente + ": " + veiculo);
             return veiculo;
         } finally {
             mutex.release();

@@ -1,44 +1,51 @@
 
-package br.com.threadjava.store;
+package main.java.br.com.threadjava.store;
 
-import br.com.threadjava.factory.EsteiraFabrica;
-import br.com.threadjava.model.Veiculo;
+
+import main.java.br.com.threadjava.factory.EsteiraFabrica;
+import main.java.br.com.threadjava.model.Veiculo;
+import main.java.br.com.threadjava.remote.IFabrica;
+
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 public class Loja extends Thread {
     private int idLoja;
-    private EsteiraLoja esteira;
-    private EsteiraFabrica esteiraPrincipal;
-    private int veiculosSolicitados;
+    private EsteiraLoja esteiraLocal;
+    private IFabrica fabricaRemota;
 
-    public Loja(int idLoja, EsteiraFabrica esteiraPrincipal) {
+    public Loja(int idLoja, String hostFabrica) {
         this.idLoja = idLoja;
-        this.esteiraPrincipal = esteiraPrincipal;
-        this.esteira = new EsteiraLoja(40);
-        this.veiculosSolicitados = 0;
+        this.esteiraLocal = new EsteiraLoja(40);
+        try {
+            Registry registry = LocateRegistry.getRegistry(hostFabrica, 1099);
+            this.fabricaRemota = (IFabrica) registry.lookup("ServicoFabrica");
+        } catch(Exception e) {
+            System.err.println("Loja " + idLoja + " não conseguiu conectar à fábrica: " + e.getMessage());
+        }
     }
 
     public int getIdLoja() {
         return idLoja;
     }
 
-    public EsteiraLoja getEsteira() {
-        return esteira;
+    public EsteiraLoja getEsteiraLocal() {
+        return esteiraLocal;
     }
 
     @Override
     public void run() {
         try {
-            while (true) {
-                Veiculo veiculo = esteiraPrincipal.remover();
-                if (veiculo != null) {
-                    esteira.inserir(veiculo);
-                    System.out.println("LOG VENDA LOJA " + idLoja + ": " + veiculo);
-                    veiculosSolicitados++;
+            while(true) {
+                Veiculo v = fabricaRemota.solicitarVeiculo();
+                if(v != null) {
+                    int pos = esteiraLocal.inserir(v);
+                    fabricaRemota.registrarLogVenda(idLoja, pos, v);
                 }
-                Thread.sleep((long) (Math.random() * 100));
+                Thread.sleep(100);
             }
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        } catch(Exception e) {
+            System.err.println("Conexão com a fábrica perdida na loja " + idLoja);
         }
     }
 }

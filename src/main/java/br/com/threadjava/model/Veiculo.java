@@ -1,6 +1,9 @@
-package br.com.threadjava.model;
+package main.java.br.com.threadjava.model;
 
-public class Veiculo {
+import java.io.Serializable;
+
+public class Veiculo implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int id;
     private String cor;
     private String tipo;

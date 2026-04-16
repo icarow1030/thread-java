@@ -1,7 +1,9 @@
-package br.com.threadjava.client;
+package main.java.br.com.threadjava.client;
 
-import br.com.threadjava.model.Veiculo;
-import br.com.threadjava.store.Loja;
+
+import main.java.br.com.threadjava.model.Veiculo;
+import main.java.br.com.threadjava.store.Loja;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,14 +37,13 @@ public class Cliente extends Thread {
 
                 int veiculoParaComprar = (int) (Math.random() * 3) + 1;
 
-                for (int i = 0; i < veiculoParaComprar; i++) {
+                for(int i = 0; i < veiculoParaComprar; i++) {
                     try {
-                        Veiculo veiculo = loja.getEsteira().remover();
-                        if (veiculo != null) {
+                        Veiculo veiculo = loja.getEsteiraLocal().venderParaCliente(idCliente, loja.getIdLoja());
+                        if(veiculo != null) {
                             garagem.add(veiculo);
-                            System.out.println("LOG VENDA CLIENTE: Cliente " + idCliente + " comprou " + veiculo);
                         }
-                    } catch (InterruptedException e) {
+                    } catch(InterruptedException e) {
                         System.out.println("Cliente " + idCliente + " aguardando veículo disponível na loja " + lojaEscolhida);
                         break;
                     }

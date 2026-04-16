@@ -1,24 +1,33 @@
-package br.com.threadjava.app;
+package main.java.br.com.threadjava.app;
 
-import br.com.threadjava.factory.Estacao;
-import br.com.threadjava.factory.EsteiraFabrica;
+import main.java.br.com.threadjava.factory.Estacao;
+import main.java.br.com.threadjava.factory.EsteiraFabrica;
+import main.java.br.com.threadjava.remote.IFabrica;
+import main.java.br.com.threadjava.service.FabricaServico;
+
 import java.util.concurrent.Semaphore;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 public class FabricaMain {
     public static void main(String[] args) {
-        System.out.println("Iniciando fábrica de veículos...");
+        try {
+            System.out.println("Iniciando infraestruturas da fábrica...");
 
-        Semaphore estoquePecas = new Semaphore(500);
-        Semaphore esteiraPecas = new Semaphore(5);
+            Semaphore estoquePecas = new Semaphore(500);
+            Semaphore esteiraPecas = new Semaphore(5);
+            EsteiraFabrica esteiraPrincipal = new EsteiraFabrica(40);
 
-        EsteiraFabrica esteiraPrincipal = new EsteiraFabrica(40);
-        Estacao[] estacoes = new Estacao[4];
+            for(int i = 0; i < 4; i++) {
+                new Estacao(i, esteiraPrincipal, estoquePecas, esteiraPecas).iniciarProducao();
+            }
 
-        for(int i = 0; i < 4; i++) {
-            estacoes[i] = new Estacao(i, esteiraPrincipal, estoquePecas, esteiraPecas);
-            estacoes[i].iniciarProducao();
+            IFabrica stub = new FabricaServico(esteiraPrincipal);
+            Registry registry = LocateRegistry.createRegistry(1099);
+            registry.rebind("ServicoFabrica", stub);
+            System.out.println("Fábrica distribuída pronta no porto 1099.");
+        } catch(Exception e) {
+            e.printStackTrace();
         }
-
-        System.out.println("Fábrica de veículos em operação. Pressione Ctrl+C para encerrar.");
     }
 }
